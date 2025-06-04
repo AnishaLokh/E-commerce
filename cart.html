@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Your Cart</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="checkout.html">Checkout</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="cart-items"></section>
+        <h3 id="total"></h3>
+    </main>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: "Cyber Keyboard",
+                price: 1499,
+                image: "images/1.jpg"
+            },
+            {
+                id: 2,
+                name: "Secure Mouse",
+                price: 799,
+                image: "images/2.jpg"
+            },
+            {
+                id: 3,
+                name: "Firewall Mug",
+                price: 499,
+                image: "images/3.jpg"
+            },
+            {
+                id: 4,
+                name: "Secure Mouse",
+                price: 799,
+                image: "images/4.jpg"
+            },
+            {
+                id: 5,
+                name: "Secure Mouse",
+                price: 799,
+                image: "images/5.jpg"
+            },
+            {
+                id: 6,
+                name: "Secure Mouse",
+                price: 799,
+                image: "images/6.jpg"
+            },
+            {
+                id: 7,
+                name: "Secure Mouse",
+                price: 799,
+                image: "images/7.jpg"
+            },
+             {
+                id: 8,
+                name: "Secure Mouse",
+                price: 799,
+                image: "images/8.jpg"
+            },
+        ];
+
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartItemsContainer = document.getElementById("cart-items");
+        let total = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+        } else {
+            cart.forEach(id => {
+                const product = products.find(p => p.id === id);
+                if (product) {
+                    const item = document.createElement("div");
+                    item.className = "product";
+                    item.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}">
+                        <h3>${product.name}</h3>
+                        <p>₹${product.price}</p>
+                    `;
+                    total += product.price;
+                    cartItemsContainer.appendChild(item);
+                }
+            });
+            document.getElementById("total").textContent = "Total: ₹" + total;
+        }
+    </script>
+</body>
+</html>
